@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS & Korean by Baidaulet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy: #07173a;
+  --navy2: #0d2451;
+  --blue: #1348a8;
+  --gold: #f5c518;
+  --gold2: #e0ad08;
+  --white: #f5f7ff;
+  --gray: #aec0e0;
+  --red: #e84040;
+  --green: #2ecc71;
+  --orange: #ff8c00;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--navy);
+  color: var(--white);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ─── STARFIELD ─── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 30% 70%, rgba(255,255,255,.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 55% 30%, rgba(255,255,255,.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 75% 85%, rgba(255,255,255,.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 90% 20%, rgba(255,255,255,.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 20% 50%, rgba(255,255,255,.25) 0%, transparent 100%),
+    radial-gradient(1px 1px at 60% 60%, rgba(255,255,255,.35) 0%, transparent 100%),
+    radial-gradient(1px 1px at 45% 90%, rgba(255,255,255,.2) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── NAV ─── */
+nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 20px;
+  background: rgba(7,23,58,0.92);
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 2px solid rgba(245,197,24,0.25);
+  flex-wrap: wrap;
+}
+
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  flex: 1;
+  min-width: 120px;
+}
+
+nav button {
+  background: transparent;
+  color: var(--gray);
+  border: 1.5px solid rgba(255,255,255,0.15);
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  transition: all .2s;
+}
+nav button:hover, nav button.nav-active {
+  background: var(--gold);
+  color: var(--navy);
+  border-color: var(--gold);
+}
+
+/* ─── PAGES ─── */
+.page { display: none; padding: 30px 20px 60px; animation: fadeUp .35s ease; position: relative; z-index: 1; max-width: 900px; margin: 0 auto; }
+.page.active { display: block; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── HERO ─── */
+.hero {
+  text-align: center;
+  padding: 50px 20px 40px;
+}
+.hero h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(38px, 8vw, 76px);
+  letter-spacing: 3px;
+  line-height: 1;
+  color: var(--white);
+}
+.hero h1 span { color: var(--gold); }
+.hero p {
+  margin-top: 14px;
+  font-size: 18px;
+  color: var(--gray);
+  font-weight: 600;
+}
+
+/* ─── GRID CARDS ─── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 18px;
+  margin-top: 36px;
+}
+
+.cat {
+  background: var(--navy2);
+  border: 2px solid rgba(245,197,24,0.2);
+  border-radius: 18px;
+  padding: 30px 20px;
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 16px;
+  text-align: center;
+  transition: all .25s;
+  line-height: 1.5;
+}
+.cat:hover {
+  border-color: var(--gold);
+  background: rgba(245,197,24,0.08);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(245,197,24,0.15);
+}
+.cat .cat-icon { font-size: 36px; display: block; margin-bottom: 10px; }
+
+/* ─── SECTION TITLES ─── */
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  letter-spacing: 2px;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+.section-sub { color: var(--gray); margin-bottom: 28px; font-size: 15px; }
+
+/* ─── BACK BUTTON ─── */
+.back-row { margin-bottom: 24px; }
+.back {
+  background: transparent;
+  color: var(--gray);
+  border: 1.5px solid rgba(255,255,255,0.2);
+  padding: 9px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  transition: all .2s;
+}
+.back:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ─── FLASHCARD ─── */
+.cardBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.card-scene {
+  width: 320px;
+  height: 200px;
+  perspective: 800px;
+}
+
+.card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform .55s cubic-bezier(.4,0,.2,1);
+  cursor: pointer;
+}
+.card-inner.flipped { transform: rotateY(180deg); }
+
+.card-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 900;
+  backface-visibility: hidden;
+  padding: 20px;
+  text-align: center;
+}
+.card-front { background: var(--white); color: var(--navy); box-shadow: 0 8px 30px rgba(0,0,0,.35); }
+.card-back  { background: var(--gold);  color: var(--navy); transform: rotateY(180deg); box-shadow: 0 8px 30px rgba(245,197,24,.4); }
+
+.card-hint { text-align: center; font-size: 13px; color: var(--gray); margin-top: 10px; }
+
+.counter {
+  text-align: center;
+  font-size: 13px;
+  color: var(--gray);
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.controls { display: flex; justify-content: center; gap: 14px; margin-top: 22px; flex-wrap: wrap; }
+.btn {
+  background: var(--gold);
+  color: var(--navy);
+  border: none;
+  padding: 11px 24px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  transition: all .2s;
+}
+.btn:hover { background: var(--gold2); transform: translateY(-2px); }
+.btn.secondary {
+  background: transparent;
+  color: var(--white);
+  border: 1.5px solid rgba(255,255,255,0.25);
+}
+.btn.secondary:hover { border-color: var(--gold); color: var(--gold); background: transparent; }
+
+/* ─── PROGRESS BAR ─── */
+.progress-bar {
+  width: 100%;
+  max-width: 340px;
+  height: 5px;
+  background: rgba(255,255,255,.1);
+  border-radius: 99px;
+  margin: 16px auto 0;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--gold);
+  border-radius: 99px;
+  transition: width .3s ease;
+}
+
+/* ─── SEARCH ─── */
+.search-box {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  max-width: 400px;
+}
+.search-box input {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1.5px solid rgba(255,255,255,.15);
+  background: var(--navy2);
+  color: var(--white);
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  outline: none;
+}
+.search-box input:focus { border-color: var(--gold); }
+.search-box button { padding: 10px 18px; border-radius: 10px; }
+
+/* ─── COURSES ─── */
+.course-section { margin-bottom: 44px; }
+.course-section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px;
+  letter-spacing: 1.5px;
+  color: var(--gold);
+  border-bottom: 2px solid rgba(245,197,24,0.25);
+  padding-bottom: 8px;
+  margin-bottom: 20px;
+}
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 18px;
+}
+.course-card {
+  background: var(--navy2);
+  border: 2px solid rgba(245,197,24,0.2);
+  border-radius: 18px;
+  padding: 24px 20px;
+  transition: all .25s;
+}
+.course-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(245,197,24,.12);
+}
+.course-card h4 { font-size: 17px; font-weight: 800; margin-bottom: 12px; }
+.price { font-size: 28px; font-weight: 900; color: var(--gold); margin-bottom: 14px; }
+.price small { font-size: 14px; color: var(--gray); }
+.schedule {
+  font-size: 13px;
+  color: var(--gray);
+  background: rgba(255,255,255,.04);
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 18px;
+  line-height: 1.8;
+}
+.schedule strong { color: var(--white); }
+
+/* ─── QUIZ ─── */
+.quiz-lang-btns { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 10px; }
+.quiz-lang-btn {
+  background: var(--navy2);
+  border: 2px solid rgba(245,197,24,0.2);
+  color: var(--white);
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  padding: 20px 36px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all .22s;
+}
+.quiz-lang-btn:hover {
+  border-color: var(--gold);
+  background: rgba(245,197,24,0.1);
+  transform: translateY(-3px);
+}
+
+.quiz-body {
+  background: var(--navy2);
+  border: 1.5px solid rgba(245,197,24,0.15);
+  padding: 28px;
+  border-radius: 18px;
+  max-width: 600px;
+}
+
+.question-block {
+  margin-bottom: 22px;
+  padding: 16px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 12px;
+  border-left: 3px solid var(--blue);
+}
+.question-block p { font-weight: 700; margin-bottom: 12px; line-height: 1.5; }
+.question-block label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background .15s;
+}
+.question-block label:hover { background: rgba(245,197,24,0.08); }
+.question-block input[type="radio"] { accent-color: var(--gold); width: 16px; height: 16px; cursor: pointer; }
+
+.badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  float: right;
+}
+.badge-easy   { background: var(--green); color: #fff; }
+.badge-medium { background: var(--orange); color: #fff; }
+.badge-hard   { background: var(--red); color: #fff; }
+
+#result {
+  margin-top: 18px;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.7;
+}
+
+.result-card {
+  background: rgba(245,197,24,.08);
+  border: 2px solid var(--gold);
+  border-radius: 14px;
+  padding: 20px;
+  margin-top: 18px;
+  text-align: center;
+  display: none;
+}
+.result-score { font-family: 'Bebas Neue', sans-serif; font-size: 56px; color: var(--gold); line-height: 1; }
+.result-level { font-size: 18px; font-weight: 800; margin-top: 6px; }
+.result-msg { color: var(--gray); font-size: 14px; margin-top: 6px; }
+
+/* ─── CONTACT ─── */
+.contact-info {
+  background: var(--navy2);
+  border: 1.5px solid rgba(245,197,24,0.2);
+  border-radius: 18px;
+  padding: 24px;
+  margin-bottom: 28px;
+  max-width: 480px;
+}
+.contact-info p { margin-bottom: 10px; font-size: 15px; line-height: 1.6; }
+.contact-info a { color: var(--gold); text-decoration: none; }
+.contact-info a:hover { text-decoration: underline; }
+
+.feedback-form { max-width: 500px; }
+.feedback-form h3 { font-size: 22px; font-weight: 800; margin-bottom: 20px; }
+.form-group { margin-bottom: 14px; }
+.form-group label { display: block; font-size: 13px; color: var(--gray); margin-bottom: 5px; font-weight: 700; }
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1.5px solid rgba(255,255,255,.12);
+  background: var(--navy2);
+  color: var(--white);
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition: border-color .2s;
+}
+.form-group input:focus,
+.form-group textarea:focus { border-color: var(--gold); }
+.form-group textarea { height: 110px; resize: vertical; }
+#feedback-status {
+  margin-top: 14px;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 480px) {
+  nav { gap: 6px; }
+  nav button { padding: 7px 10px; font-size: 12px; }
+  .nav-logo { font-size: 18px; }
+  .course-grid { grid-template-columns: 1fr; }
+  .quiz-body { padding: 18px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">BAIDAULET</div>
+  <button onclick="go('home')" id="nav-home">🏠 Главная</button>
+  <button onclick="go('cards')" id="nav-cards">🇺🇸 Словарь</button>
+  <button onclick="go('courses')" id="nav-courses">📅 Курсы</button>
+  <button onclick="go('test')" id="nav-test">🧠 Тест</button>
+  <button onclick="go('contact')" id="nav-contact">📞 Контакт</button>
+</nav>
+
+<!-- ═══════════ HOME ═══════════ -->
+<div id="home" class="page active">
+  <div class="hero">
+    <h1>IELTS & <span>Корейский</span><br>с Байдаулетом</h1>
+    <p>Учи языки в Семее эффективно — с нуля до результата 🚀</p>
+  </div>
+
+  <div class="grid">
+    <div class="cat" onclick="openCategory()">
+      <span class="cat-icon">🇺🇸</span>
+      IELTS Vocabulary
+    </div>
+    <div class="cat" onclick="go('courses')">
+      <span class="cat-icon">📅</span>
+      Курсы и цены
+    </div>
+    <div class="cat" onclick="go('test')">
+      <span class="cat-icon">🧠</span>
+      Тест уровня
+    </div>
+    <div class="cat" onclick="go('contact')">
+      <span class="cat-icon">📞</span>
+      Контакт и запись
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ FLASHCARDS ═══════════ -->
+<div id="cards" class="page">
+  <div class="back-row">
+    <button class="back" onclick="go('home')">← Назад</button>
+  </div>
+
+  <div class="section-title">IELTS Vocabulary</div>
+  <p class="section-sub">Нажми на карточку чтобы увидеть перевод</p>
+
+  <div class="search-box">
+    <input type="text" id="search-input" placeholder="Поиск слова..." oninput="searchWords()">
+    <button class="btn" onclick="clearSearch()">✕</button>
+  </div>
+
+  <div class="counter" id="word-counter"></div>
+
+  <div class="cardBox">
+    <div>
+      <div class="card-scene">
+        <div class="card-inner" id="card-inner" onclick="flip()">
+          <div class="card-face card-front" id="card-front"></div>
+          <div class="card-face card-back"  id="card-back"></div>
+        </div>
+      </div>
+      <p class="card-hint">👆 Нажми чтобы перевернуть</p>
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="btn secondary" onclick="prev()">← Назад</button>
+    <button class="btn" onclick="shuffle()">🔀 Перемешать</button>
+    <button class="btn" onclick="next()">Вперёд →</button>
+  </div>
+</div>
+
+<!-- ═══════════ COURSES ═══════════ -->
+<div id="courses" class="page">
+  <div class="back-row"><button class="back" onclick="go('home')">← Назад</button></div>
+
+  <div class="section-title">Курсы в Семее</div>
+  <p class="section-sub">Цены за 1 месяц обучения</p>
+
+  <div class="course-section">
+    <div class="course-section-title">🇺🇸 Английский / IELTS</div>
+    <div class="course-grid">
+      <div class="course-card">
+        <h4>👥 Групповое обучение</h4>
+        <div class="price">30 000 ₸ <small>/ мес</small></div>
+        <div class="schedule">
+          <strong>Расписание:</strong><br>
+          📆 3 раза в неделю по 60 мин<br>
+          🗓 Пн – Ср – Пт<br>
+          🕐 16:00 или 19:00<br>
+          👥 До 6 человек в группе
+        </div>
+        <button class="btn" style="width:100%" onclick="setCourseAndGoContact('Английский (Группа)')">Записаться</button>
+      </div>
+
+      <div class="course-card">
+        <h4>👤 Индивидуально</h4>
+        <div class="price">60 000 ₸ <small>/ мес</small></div>
+        <div class="schedule">
+          <strong>Расписание:</strong><br>
+          📆 3 раза в неделю по 60 мин<br>
+          🗓 Гибкие дни<br>
+          🕐 Любое удобное время<br>
+          🎯 Тет-а-тет с преподавателем
+        </div>
+        <button class="btn" style="width:100%" onclick="setCourseAndGoContact('Английский (Индивидуально)')">Записаться</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="course-section">
+    <div class="course-section-title">🇰🇷 Корейский язык (K-Pop / TOPIK)</div>
+    <div class="course-grid">
+      <div class="course-card">
+        <h4>👥 Группа</h4>
+        <div class="price">28 000 ₸ <small>/ мес</small></div>
+        <div class="schedule">
+          <strong>Расписание:</strong><br>
+          📆 3 раза в неделю по 60 мин<br>
+          🗓 Вт – Чт – Сб<br>
+          🕐 Дневное / вечернее<br>
+          🗣 Разговорный + Алфавит
+        </div>
+        <button class="btn" style="width:100%" onclick="setCourseAndGoContact('Корейский (Группа)')">Записаться</button>
+      </div>
+
+      <div class="course-card">
+        <h4>👤 Индивидуально</h4>
+        <div class="price">55 000 ₸ <small>/ мес</small></div>
+        <div class="schedule">
+          <strong>Расписание:</strong><br>
+          📆 3 раза в неделю по 60 мин<br>
+          🗓 Личный график<br>
+          🏆 TOPIK / Подготовка к переезду<br>
+          🎓 Персональный темп
+        </div>
+        <button class="btn" style="width:100%" onclick="setCourseAndGoContact('Корейский (Индивидуально)')">Записаться</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ TEST ═══════════ -->
+<div id="test" class="page">
+  <div class="back-row"><button class="back" onclick="resetQuiz()">← Назад</button></div>
+
+  <div class="section-title">Тест уровня</div>
+  <p class="section-sub" id="test-description">Выберите язык чтобы начать тест:</p>
+
+  <div id="quiz-selection" class="quiz-lang-btns">
+    <button class="quiz-lang-btn" onclick="startTest('eng')">🇺🇸 English Test</button>
+    <button class="quiz-lang-btn" onclick="startTest('kor')">🇰🇷 Korean Test</button>
+  </div>
+
+  <div class="quiz-body" id="quiz-body" style="display:none">
+    <div id="questions-container"></div>
+    <button class="btn" style="margin-top:20px" onclick="checkQuizResult()">Получить результат ✨</button>
+    <div class="result-card" id="result-card">
+      <div class="result-score" id="result-score"></div>
+      <div class="result-level" id="result-level"></div>
+      <div class="result-msg"  id="result-msg"></div>
+      <button class="btn secondary" style="margin-top:16px" onclick="resetQuiz()">Пройти снова</button>
+    </div>
+    <p id="result" style="color:var(--red)"></p>
+  </div>
+</div>
+
+<!-- ═══════════ CONTACT ═══════════ -->
+<div id="contact" class="page">
+  <div class="back-row"><button class="back" onclick="go('home')">← Назад</button></div>
+
+  <div class="section-title">Контакт и запись</div>
+  <p class="section-sub">Свяжитесь или оставьте заявку</p>
+
+  <div class="contact-info">
+    <p>👤 <strong>Байдаулет</strong> — преподаватель IELTS и Корейского</p>
+    <p>📞 <a href="tel:+77815594001">+7 781 559 40 01</a></p>
+    <p>📱 <a href="https://wa.me/77815594001" target="_blank">WhatsApp: +7 781 559 40 01</a></p>
+    <p>📧 <a href="mailto:baikarakhimov2006@gmail.com">baikarakhimov2006@gmail.com</a></p>
+    <p>📍 г. Семей, Казахстан</p>
+  </div>
+
+  <div class="feedback-form">
+    <h3>✍️ Оставить заявку или отзыв</h3>
+    <div class="form-group">
+      <label>Ваше имя *</label>
+      <input type="text" id="fb-name" placeholder="Например: Алина">
+    </div>
+    <div class="form-group">
+      <label>Телефон (WhatsApp) *</label>
+      <input type="tel" id="fb-phone" placeholder="+7 ...">
+    </div>
+    <div class="form-group">
+      <label>Курс / вопрос / отзыв</label>
+      <textarea id="fb-msg" placeholder="Напишите выбранный курс или ваш вопрос..."></textarea>
+    </div>
+    <button class="btn" onclick="sendFeedback()">Отправить заявку 📤</button>
+    <p id="feedback-status"></p>
+  </div>
+</div>
+
+<script>
+// ── DATA ──────────────────────────────────────────
+const allWords = [
+  ["Achieve","Достигать"], ["Improve","Улучшать"], ["Knowledge","Знание"], ["Success","Успех"], ["Confidence","Уверенность"],
+  ["Adult","Взрослый"], ["Aberration","Помрачение ума"], ["Alacrity","Готовность, рвение"], ["Avarice","Жадность, алчность"],
+  ["Candor","Откровенность, прямота"], ["Complacency","Самодовольство"], ["Confidant","Задушевный друг"],
+  ["Despot","Деспот, тиран"], ["Empathy","Эмпатия, участливость"], ["Enmity","Вражда, ненависть"], ["Gluttony","Обжорство"],
+  ["Hypocrisy","Лицемерие"], ["Infamy","Позор, бесславие"], ["Knell","Похоронный звон"], ["Maverick","Индивидуалист"],
+  ["Maxim","Афоризм, изречение"], ["Modicum","Чуточка, толика"], ["Myriad","Бесчисленное множество"], ["Novice","Новичок"],
+  ["Nuance","Оттенок, нюанс"], ["Zenith","Высшая точка, расцвет"], ["Appease","Успокаивать"], ["Ambiguous","Двусмысленный"],
+  ["Analysis","Анализ"], ["Assumption","Предположение"], ["Bias","Предвзятость"], ["Cohesion","Связность"],
+  ["Consequence","Последствие"], ["Contradict","Противоречить"], ["Criteria","Критерии"], ["Decline","Спад, упадок"],
+  ["Deteriorate","Ухудшаться"], ["Disparity","Неравенство"], ["Diversity","Разнообразие"], ["Emphasize","Подчёркивать"],
+  ["Enhance","Улучшать"], ["Establish","Устанавливать"], ["Evaluate","Оценивать"], ["Evidence","Доказательство"],
+  ["Fluctuate","Колебаться"], ["Hypothesis","Гипотеза"], ["Impact","Влияние"], ["Inevitable","Неизбежный"],
+  ["Interpret","Интерпретировать"], ["Justify","Обосновывать"], ["Maintain","Поддерживать"],
+  ["Manipulate","Манипулировать"], ["Modify","Изменять"], ["Outcome","Результат"], ["Perspective","Точка зрения"],
+  ["Prevalent","Распространённый"], ["Principle","Принцип"], ["Reinforce","Усиливать"], ["Relevant","Актуальный"],
+  ["Restrict","Ограничивать"], ["Significant","Значительный"], ["Subsequent","Последующий"], ["Sustain","Поддерживать долгосрочно"],
+  ["Transition","Переход"], ["Validate","Подтверждать"], ["Variation","Вариация"], ["Comprehensive","Всеобъемлющий"],
+  ["Concept","Концепция"], ["Consistent","Последовательный"], ["Context","Контекст"], ["Contrast","Контраст"],
+  ["Crucial","Критически важный"], ["Debate","Дебаты"], ["Define","Определять"], ["Dominant","Доминирующий"],
+  ["Eliminate","Устранять"], ["Framework","Структура"], ["Fundamental","Фундаментальный"], ["Generate","Генерировать"],
+  ["Identify","Идентифицировать"], ["Indicate","Указывать"], ["Integrate","Интегрировать"], ["Mechanism","Механизм"],
+  ["Occur","Происходить"], ["Policy","Политика"], ["Predict","Предсказывать"], ["Ratio","Соотношение"],
+  ["Theory","Теория"], ["Variable","Переменная"], ["Widespread","Распространённый"], ["Accurate","Точный"],
+  ["Alternative","Альтернатива"], ["Approach","Подход"], ["Assessment","Оценка"], ["Component","Компонент"],
+  ["Conclusion","Вывод"], ["Constraint","Ограничение"], ["Distribution","Распределение"], ["Methodology","Методология"],
+  ["Phenomenon","Явление"], ["Strategy","Стратегия"], ["Summary","Резюме"]
+];
+
+let words = [...allWords];
+let i = 0;
+let flipped = false;
+
+const quizData = {
+  eng: [
+    { type: "easy",   text: "1. She ___ to school every day.", answers: ["go","goes","going"], correct: 1 },
+    { type: "easy",   text: "2. Translate: 'Success'", answers: ["Успех","Решение","Опыт"], correct: 0 },
+    { type: "medium", text: "3. If it rains tomorrow, we ___ the match.", answers: ["would cancel","will cancel","canceled"], correct: 1 },
+    { type: "medium", text: "4. Synonym for 'Enhance':", answers: ["Deteriorate","Improve","Reduce"], correct: 1 },
+    { type: "hard",   text: "5. By the time the movie started, we ___ popcorn.", answers: ["already ate","have already eaten","had already eaten"], correct: 2 }
+  ],
+  kor: [
+    { type: "easy",   text: "1. Как называется корейский алфавит?", answers: ["Хангыль","Хана","К-поп"], correct: 0 },
+    { type: "easy",   text: "2. '안녕하세요' означает:", answers: ["До свидания","Здравствуйте","Спасибо"], correct: 1 },
+    { type: "medium", text: "3. Окончание вежливо-официального стиля:", answers: ["-аё / -оё","-мнида / -сымнида","-я"], correct: 1 },
+    { type: "medium", text: "4. '친구' (Чингу) переводится как:", answers: ["Враг","Учитель","Друг"], correct: 2 },
+    { type: "hard",   text: "5. Грамматика для выражения намерения / плана:", answers: ["-(으)려고 하다","-(으)면","-고 싶다"], correct: 0 }
+  ]
+};
+
+let currentQuizLang = "";
+
+// ── NAVIGATION ────────────────────────────────────
+function go(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(page).classList.add('active');
+  document.querySelectorAll('nav button[id^="nav-"]').forEach(b => b.classList.remove('nav-active'));
+  const nb = document.getElementById('nav-' + page);
+  if (nb) nb.classList.add('nav-active');
+  window.scrollTo(0,0);
+}
+
+// ── FLASHCARD ─────────────────────────────────────
+function loadCard() {
+  if (!words.length) return;
+  flipped = false;
+  document.getElementById('card-inner').classList.remove('flipped');
+  document.getElementById('card-front').textContent = words[i][0];
+  document.getElementById('card-back').textContent  = words[i][1];
+  document.getElementById('word-counter').textContent = `${i+1} / ${words.length}`;
+  const pct = ((i+1)/words.length*100).toFixed(1);
+  document.getElementById('progress-fill').style.width = pct + '%';
+}
+
+function flip() {
+  flipped = !flipped;
+  document.getElementById('card-inner').classList.toggle('flipped', flipped);
+}
+
+function next() {
+  i = (i+1) % words.length;
+  loadCard();
+}
+
+function prev() {
+  i = (i-1+words.length) % words.length;
+  loadCard();
+}
+
+function shuffle() {
+  for (let j = words.length-1; j > 0; j--) {
+    const k = Math.floor(Math.random()*(j+1));
+    [words[j],words[k]] = [words[k],words[j]];
+  }
+  i = 0;
+  loadCard();
+}
+
+function openCategory() {
+  words = [...allWords];
+  i = 0;
+  go('cards');
+  loadCard();
+}
+
+function searchWords() {
+  const q = document.getElementById('search-input').value.toLowerCase().trim();
+  if (!q) { words = [...allWords]; }
+  else {
+    words = allWords.filter(w =>
+      w[0].toLowerCase().includes(q) || w[1].toLowerCase().includes(q)
+    );
+  }
+  i = 0;
+  if (words.length) loadCard();
+  else {
+    document.getElementById('card-front').textContent = 'Не найдено';
+    document.getElementById('card-back').textContent  = 'Not found';
+    document.getElementById('word-counter').textContent = '0 слов';
+    document.getElementById('progress-fill').style.width = '0%';
+  }
+}
+
+function clearSearch() {
+  document.getElementById('search-input').value = '';
+  searchWords();
+}
+
+// ── QUIZ ──────────────────────────────────────────
+function startTest(lang) {
+  currentQuizLang = lang;
+  document.getElementById('quiz-selection').style.display = 'none';
+  document.getElementById('test-description').textContent =
+    lang === 'eng' ? '🇺🇸 English Test (IELTS)' : '🇰🇷 Korean Test';
+
+  const container = document.getElementById('questions-container');
+  container.innerHTML = '';
+
+  quizData[lang].forEach((q, qi) => {
+    const labels = { easy:'easy', medium:'medium', hard:'hard' };
+    const badgeTxt = { easy:'Легкий', medium:'Средний', hard:'Сложный' };
+    let html = `<div class="question-block">
+      <span class="badge badge-${labels[q.type]}">${badgeTxt[q.type]}</span>
+      <p>${q.text}</p>`;
+    q.answers.forEach((a, ai) => {
+      html += `<label>
+        <input type="radio" name="q${qi}" value="${ai}"> ${a}
+      </label>`;
+    });
+    html += '</div>';
+    container.innerHTML += html;
+  });
+
+  document.getElementById('quiz-body').style.display = 'block';
+  document.getElementById('result-card').style.display = 'none';
+  document.getElementById('result').textContent = '';
+}
+
+function checkQuizResult() {
+  const questions = quizData[currentQuizLang];
+  let score = 0;
+  let all = true;
+  questions.forEach((q, qi) => {
+    const sel = document.querySelector(`input[name="q${qi}"]:checked`);
+    if (!sel) { all = false; }
+    else if (Number(sel.value) === q.correct) score++;
+  });
+
+  if (!all) {
+    document.getElementById('result').textContent = '⚠️ Ответьте на все вопросы!';
+    return;
+  }
+  document.getElementById('result').textContent = '';
+
+  let level, msg;
+  if (currentQuizLang === 'eng') {
+    if (score <= 1)      { level = 'A1 — Beginner';  msg = 'Отличное начало! Рекомендуем групповой курс.'; }
+    else if (score <= 3) { level = 'A2–B1 — Intermediate'; msg = 'Хороший уровень. Можно работать над IELTS!'; }
+    else                 { level = 'B2–C1 — Advanced'; msg = 'Отличный результат! Попробуй индивидуальный курс.'; }
+  } else {
+    if (score <= 1)      { level = '초급 — Начальный (1-2 급)'; msg = 'Хорошее начало! Базовый курс Корейского.'; }
+    else if (score <= 3) { level = '중급 — Средний (3-4 급)'; msg = 'Неплохой уровень! Продолжай практику.'; }
+    else                 { level = '고급 — Высший (5-6 급)'; msg = 'Отличный уровень! TOPIK доступен 🏆'; }
+  }
+
+  document.getElementById('result-score').textContent = `${score}/5`;
+  document.getElementById('result-level').textContent = level;
+  document.getElementById('result-msg').textContent   = msg;
+  document.getElementById('result-card').style.display = 'block';
+}
+
+function resetQuiz() {
+  document.getElementById('quiz-body').style.display = 'none';
+  document.getElementById('quiz-selection').style.display = 'flex';
+  document.getElementById('test-description').textContent = 'Выберите язык чтобы начать тест:';
+  document.getElementById('result-card').style.display = 'none';
+  go('home');
+}
+
+// ── CONTACT ───────────────────────────────────────
+function setCourseAndGoContact(name) {
+  go('contact');
+  document.getElementById('fb-msg').value = `Здравствуйте, хочу записаться на курс: ${name}`;
+}
+
+function sendFeedback() {
+  const name  = document.getElementById('fb-name').value.trim();
+  const phone = document.getElementById('fb-phone').value.trim();
+  const status = document.getElementById('feedback-status');
+
+  if (!name || !phone) {
+    status.textContent = '⚠️ Пожалуйста, заполните имя и телефон!';
+    status.style.color = 'var(--red)';
+    return;
+  }
+  status.innerHTML = `✅ Спасибо, <strong>${name}</strong>! Ваша заявка принята. Байдаулет свяжется с вами в ближайшее время.`;
+  status.style.color = 'var(--gold)';
+  document.getElementById('fb-name').value  = '';
+  document.getElementById('fb-phone').value = '';
+  document.getElementById('fb-msg').value   = '';
+}
+
+// ── INIT ──────────────────────────────────────────
+window.addEventListener('load', () => {
+  go('home');
+  loadCard();
+});
+</script>
+</body>
+</html>
